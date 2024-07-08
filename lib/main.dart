@@ -1,11 +1,15 @@
 // import 'package:firebase/splashscreen.dart';
-import 'package:firebase/welcome.dart';
+import 'package:firebase/Screen/welcome.dart';
+import 'package:firebase/Firebase/firebase_api.dart';
+import 'package:firebase/Screen/splashscreen.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:awesome_notifications/awesome_notifications.dart';
+// import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'package:firebase/homepage.dart';
+import 'package:firebase/Firebase/firebase_options.dart';
+import 'package:firebase/Screen/home_page.dart';
+import 'package:device_preview/device_preview.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,22 +17,29 @@ Future<void> main() async {
     name: "bath-mate",
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FirebaseApi().initNotification();
 
-  AwesomeNotifications().initialize(
-    null,
-    [
-      NotificationChannel(
-        channelKey: 'basic_channel',
-        channelName: 'basic notifications',
-        channelDescription: 'Notification channel for basic test',
-        importance: NotificationImportance.High,
-        channelShowBadge: true,
-      ),
-    ],
-    debug: true,
-  );
+  // AwesomeNotifications().initialize(
+  //   null,
+  //   [
+  //     NotificationChannel(
+  //       channelKey: 'basic_channel',
+  //       channelName: 'basic notifications',
+  //       channelDescription: 'Notification channel for basic test',
+  //       importance: NotificationImportance.High,
+  //       channelShowBadge: true,
+  //     ),
+  //   ],
+  //   debug: true,
+  // );
 
   runApp(MyApp());
+  // runApp(
+  //   DevicePreview(
+  //     enabled: !kReleaseMode,
+  //     builder: (context) => MyApp(),
+  //   ),
+  // );
 }
 
 class MyApp extends StatelessWidget {
@@ -38,6 +49,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'login',
+      // locale: DevicePreview.locale(context),
+      // builder: DevicePreview.appBuilder,
       home: Welcome(),
       theme: ThemeData(fontFamily: 'Poppins'),
       debugShowCheckedModeBanner: false,

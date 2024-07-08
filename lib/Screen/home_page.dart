@@ -1,10 +1,11 @@
 import 'dart:async';
-// import 'dart:html';
 import 'package:d_chart/commons/axis.dart';
-import 'package:firebase/addnumber.dart';
-import 'package:firebase/emergency.dart';
-import 'package:firebase/panduanuser.dart';
-import 'package:firebase/welcome.dart';
+import 'package:firebase/Firebase/auth.dart';
+import 'package:firebase/Screen/about_us.dart';
+import 'package:firebase/Screen/emer_number.dart';
+import 'package:firebase/Screen/user_guide.dart';
+import 'package:firebase/Screen/welcome.dart';
+import 'package:firebase/Screen/logIn.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,10 +13,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'firebase_options.dart';
+import '../Firebase/firebase_options.dart';
 import 'package:d_chart/d_chart.dart';
-import 'package:awesome_notifications/awesome_notifications.dart';
+// import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:flutter/services.dart';
 
 String _Status = "";
 String _detectObject = "";
@@ -33,11 +35,13 @@ String _fallCon = "";
 String _emercall = "";
 String _fatalFall = "";
 int myIndex = 0;
+String number = '';
 var warna;
 var warna1 = Colors.grey;
 var warna2 = Colors.green;
 var warna3 = Color.fromARGB(255, 255, 242, 0);
 var warna4 = Colors.red;
+var phoneColor = Colors.red;
 bool emergencyvisib = false;
 
 class MyHomeApp extends StatefulWidget {
@@ -54,14 +58,19 @@ class _MyHomeAppState extends State<MyHomeApp> {
 
   void initState() {
     super.initState();
-    AwesomeNotifications().isNotificationAllowed().then(
-      (isAllowed) {
-        if (!isAllowed) {
-          AwesomeNotifications().requestPermissionToSendNotifications();
-        }
-      },
-    );
+    // AwesomeNotifications().isNotificationAllowed().then(
+    //   (isAllowed) {
+    //     if (!isAllowed) {
+    //       AwesomeNotifications().requestPermissionToSendNotifications();
+    //     }
+    //   },
+    // );
     _activateListeners();
+    if (tempNumber == '') {
+      phoneColor = Colors.red;
+    } else {
+      phoneColor = Colors.green;
+    }
   }
 
   void _activateListeners() {
@@ -71,68 +80,77 @@ class _MyHomeAppState extends State<MyHomeApp> {
         _Status = '$fbStatus';
         if (_Status == '3') {
           status = 'DANGER FATAL FALL!!!';
-          gambar = 'assets/4.png';
+          gambar = 'assets/5.png';
           warna = warna4;
+          emergencyvisib = true;
+          HapticFeedback.heavyImpact();
         } else if (_Status == '2') {
           status = 'WARNING!!';
           gambar = 'assets/3.png';
           warna = warna3;
+          emergencyvisib = true;
+          HapticFeedback.heavyImpact();
         } else if (_Status == '1') {
           status = 'In Used..';
           gambar = 'assets/2.png';
           warna = warna2;
+          emergencyvisib = false;
         } else if (_Status == '0') {
           status = 'Empty :)';
           gambar = 'assets/1.png';
           warna = warna1;
-        }
-      });
-    });
-    _bathmate = _database.child('fatalFall').onValue.listen((event) {
-      final fbfatalFall = event.snapshot.value;
-      setState(() {
-        _fatalFall = '$fbfatalFall';
-        if (_fatalFall == 'true') {
-          // Dfall = 'AWAS';
-          AwesomeNotifications().createNotification(
-            content: NotificationContent(
-              id: 1,
-              channelKey: 'basic_channel',
-              title: 'FATAL Fall Detected!',
-              body: 'Please Check your family immediately!',
-            ),
-          );
-          emergencyvisib = true;
-        } else {
           emergencyvisib = false;
         }
       });
     });
-    _bathmate = _database.child('fallCon').onValue.listen((event) {
-      final fbfallCon = event.snapshot.value;
-      setState(() {
-        _fallCon = '$fbfallCon';
-        if (_fallCon == 'true') {
-          // Dfall = 'AWAS';
-          AwesomeNotifications().createNotification(
-            content: NotificationContent(
-              id: 1,
-              channelKey: 'basic_channel',
-              title: 'Fall Detected!',
-              body: 'Check your family!',
-            ),
-          );
-        }
-      });
-    });
-    _bathmate = _database.child('title').onValue.listen((event) {
-      final fbemerCall = event.snapshot.value;
-      setState(
-        () {
-          _emercall = '$fbemerCall';
-        },
-      );
-    });
+    // _bathmate = _database.child('fatalFall').onValue.listen((event) {
+    //   final fbfatalFall = event.snapshot.value;
+    //   setState(() {
+    //     _fatalFall = '$fbfatalFall';
+    //     if (_fatalFall == 'true') {
+    //       // Dfall = 'AWAS';
+    //       AwesomeNotifications().createNotification(
+    //         content: NotificationContent(
+    //           id: 1,
+    //           channelKey: 'basic_channel',
+    //           title: 'FATAL Fall Detected!',
+    //           body: 'Please Check your family immediately!',
+    //         ),
+    //       );
+    //       emergencyvisib = true;
+    //     } else {
+    //       emergencyvisib = false;
+    //     }
+    //   });
+    // });
+    // _bathmate = _database.child('fallCon').onValue.listen((event) {
+    //   final fbfallCon = event.snapshot.value;
+    //   setState(() {
+    //     _fallCon = '$fbfallCon';
+    //     if (_fallCon == 'true') {
+    //       // Dfall = 'AWAS';
+    //       AwesomeNotifications().createNotification(
+    //         content: NotificationContent(
+    //           id: 1,
+    //           channelKey: 'basic_channel',
+    //           title: 'Fall Detected!',
+    //           body: 'Check your family!',
+    //         ),
+    //       );
+    //     }
+    //   });
+    // });
+    // _bathmate = _database.child("Emergency/number").onValue.listen((event) {
+    //   // _bathmate = _database.child('title').onValue.listen((event) {
+    //   final fbemerCall = event.snapshot.value;
+    //   setState(
+    //     () {
+    //       _emercall = '$fbemerCall';
+    //     },
+    //   );
+    // });
+    // });
+
     _bathmate = _database.child('xPos').onValue.listen((event) {
       final fbXPos = event.snapshot.value;
       setState(() {
@@ -164,6 +182,7 @@ class _MyHomeAppState extends State<MyHomeApp> {
 
   @override
   Widget build(BuildContext context) {
+    number = getNumber();
     List<NumericData> numericDataList = [
       NumericData(
         domain: _xDPos,
@@ -176,6 +195,7 @@ class _MyHomeAppState extends State<MyHomeApp> {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Color.fromARGB(255, 0, 114, 171),
         title: Text(
           "Hi, welcome to our app",
@@ -184,20 +204,14 @@ class _MyHomeAppState extends State<MyHomeApp> {
                 fontSize: 20, fontWeight: FontWeight.w500, color: Colors.white),
           ),
         ),
-        // leading: IconButton(
-        //   onPressed: () {
-        //     Navigator.pushReplacement(
-        //       context,
-        //       MaterialPageRoute(
-        //         builder: (_) => Welcome(),
-        //       ),
-        //     );
-        //   },
-        //   icon: const Icon(
-        //     Icons.home,
-        //     color: Colors.white,
-        //   ),
-        // ),
+        actions: <Widget>[
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.contact_phone,
+                color: phoneColor,
+              ))
+        ],
       ),
       body: Center(
         child: Container(
@@ -560,7 +574,7 @@ class _MyHomeAppState extends State<MyHomeApp> {
                     padding: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
                   ),
                   onPressed: () async {
-                    FlutterPhoneDirectCaller.callNumber(_emercall);
+                    FlutterPhoneDirectCaller.callNumber(number);
                   },
                   child: Text(
                     'EMERGENCY CALL',
@@ -602,17 +616,35 @@ class _MyHomeAppState extends State<MyHomeApp> {
       // ),
       drawer: Drawer(
         child: Container(
-          color: Color.fromARGB(255, 0, 187, 255),
+          color: Color.fromARGB(255, 255, 255, 255),
           child: ListView(
             children: [
               DrawerHeader(
                 child: Center(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
-                    child: Image.asset(
-                      'assets/aduhh.png',
-                      width: 150,
-                    ),
+                  child: Column(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(60),
+                        child: Image.network(
+                          '$imgUrl',
+                          fit: BoxFit.fill,
+                          width: 90,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        '$userEmail',
+                        style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -622,8 +654,8 @@ class _MyHomeAppState extends State<MyHomeApp> {
                   'Home',
                   style: GoogleFonts.poppins(
                     textStyle: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.normal,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
@@ -631,7 +663,7 @@ class _MyHomeAppState extends State<MyHomeApp> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => Welcome(),
+                      builder: (_) => MyHomeApp(),
                     ),
                   );
                 },
@@ -642,8 +674,8 @@ class _MyHomeAppState extends State<MyHomeApp> {
                   'Regist Emergency Number',
                   style: GoogleFonts.poppins(
                     textStyle: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.normal,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
@@ -657,13 +689,13 @@ class _MyHomeAppState extends State<MyHomeApp> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.info_outline),
+                leading: Icon(Icons.menu_book_rounded),
                 title: Text(
                   "User's Guide",
                   style: GoogleFonts.poppins(
                     textStyle: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.normal,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
@@ -672,6 +704,54 @@ class _MyHomeAppState extends State<MyHomeApp> {
                     context,
                     MaterialPageRoute(
                       builder: (_) => Panduan(),
+                    ),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.info_outline),
+                title: Text(
+                  "About Us",
+                  style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => Aboutus(),
+                    ),
+                  );
+                },
+              ),
+              SizedBox(
+                height: 400,
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.logout_rounded,
+                  color: Colors.red,
+                ),
+                title: Text(
+                  'Sign Out',
+                  style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                      fontSize: 14,
+                      color: Colors.red,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                onTap: () {
+                  AuthMethods().signOutWithGoogle(context);
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => Welcome(),
                     ),
                   );
                 },

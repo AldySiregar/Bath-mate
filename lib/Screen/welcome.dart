@@ -1,5 +1,6 @@
-import 'package:firebase/aboutus.dart';
-import 'package:firebase/homepage.dart';
+import 'package:firebase/Screen/about_us.dart';
+import 'package:firebase/Screen/home_page.dart';
+import 'package:firebase/Screen/logIn.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -73,7 +74,7 @@ class Welcome extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (_) => MyHomeApp()));
+                              MaterialPageRoute(builder: (_) => LogIn()));
                         },
                         child: Container(
                           height: 50,
@@ -98,41 +99,41 @@ class Welcome extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Positioned(
-                    bottom: 2000,
-                    left: 0,
-                    right: 0,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          left: 40, right: 40, top: 5, bottom: 40),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (_) => Aboutus()));
-                        },
-                        child: Container(
-                          height: 50,
-                          // decoration: const BoxDecoration(
-                          //   // color: Color.fromARGB(255, 255, 215, 199),
-                          //   color: Color.fromARGB(255, 255, 255, 255),
-                          //   borderRadius: BorderRadius.all(Radius.circular(30)),
-                          // ),
-                          child: Center(
-                            child: Text(
-                              'About Us',
-                              style: GoogleFonts.poppins(
-                                textStyle: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  // Positioned(
+                  //   bottom: 2000,
+                  //   left: 0,
+                  //   right: 0,
+                  //   child: Padding(
+                  //     padding: EdgeInsets.only(
+                  //         left: 40, right: 40, top: 5, bottom: 40),
+                  //     child: GestureDetector(
+                  //       onTap: () {
+                  //         Navigator.pushReplacement(context,
+                  //             MaterialPageRoute(builder: (_) => Aboutus()));
+                  //       },
+                  //       child: Container(
+                  //         height: 50,
+                  //         // decoration: const BoxDecoration(
+                  //         //   // color: Color.fromARGB(255, 255, 215, 199),
+                  //         //   color: Color.fromARGB(255, 255, 255, 255),
+                  //         //   borderRadius: BorderRadius.all(Radius.circular(30)),
+                  //         // ),
+                  //         child: Center(
+                  //           child: Text(
+                  //             'About Us',
+                  //             style: GoogleFonts.poppins(
+                  //               textStyle: const TextStyle(
+                  //                 color: Colors.black,
+                  //                 fontSize: 10,
+                  //                 fontWeight: FontWeight.w500,
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ],
