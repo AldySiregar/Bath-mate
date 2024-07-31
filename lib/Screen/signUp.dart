@@ -28,28 +28,67 @@ class _SignUpState extends State<SignUp> {
         UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.green,
             content: Text(
-          "Registered Successfully",
-          style: TextStyle(fontSize: 20.0),
-        )));
+              "Registered Successfully",
+              style: GoogleFonts.poppins(
+                textStyle: TextStyle(
+                  fontSize: 14,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            )));
         // ignore: use_build_context_synchronously
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => MyHomeApp()));
       } on FirebaseAuthException catch (e) {
+        print(e.code);
         if (e.code == 'weak-password') {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              backgroundColor: Colors.orangeAccent,
+              backgroundColor: Colors.red,
               content: Text(
-                "Password Provided is too Weak",
-                style: TextStyle(fontSize: 18.0),
+                "Your Password is too Weak",
+                style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                    fontSize: 14,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               )));
         } else if (e.code == "email-already-in-use") {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              backgroundColor: Colors.orangeAccent,
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.red,
               content: Text(
-                "Account Already exists",
-                style: TextStyle(fontSize: 18.0),
-              )));
+                "Email Already exists",
+                style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                    fontSize: 14,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+          );
+        } else if (e.code == "invalid-email") {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.red,
+              content: Text(
+                "Email Doesn't exists",
+                style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                    fontSize: 14,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+          );
         }
       }
     }
@@ -66,12 +105,13 @@ class _SignUpState extends State<SignUp> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Container(
-                        // width: MediaQuery.of(context).size.width,
-                        child: Image.asset(
-                      "assets/aduhh.png",
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Image.asset(
+                      'assets/play_store_512.png',
                       width: 450,
-                    )),
+                    ),
                     SizedBox(
                       height: 30.0,
                     ),
@@ -176,6 +216,9 @@ class _SignUpState extends State<SignUp> {
                                     email = mailcontroller.text;
                                     name = namecontroller.text;
                                     password = passwordcontroller.text;
+                                    userEmail = email;
+                                    imgUrl =
+                                        'https://github.com/AldySiregar/Bath-mate/blob/master/assets/aduhh_foreground-modified.png?raw=true';
                                   });
                                 }
                                 registration();
@@ -209,7 +252,7 @@ class _SignUpState extends State<SignUp> {
                       height: 20.0,
                     ),
                     Text(
-                      "or LogIn with",
+                      "or SignUp with",
                       style: GoogleFonts.poppins(
                         textStyle: TextStyle(
                           fontSize: 14,

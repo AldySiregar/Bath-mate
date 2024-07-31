@@ -35,30 +35,50 @@ class Welcome extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(30.10),
                     child: Image.asset(
-                      'assets/logo.png',
-                      width: 250,
+                      'assets/play_store_512.png',
+                      width: 400,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    'Bath-Mate',
-                    style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.w600,
-                          color: Color.fromARGB(255, 11, 150, 181)),
-                    ),
-                    // style: TextStyle(
-                    //   fontFamily: "Gabarito",
-                    //   fontWeight: FontWeight.w300,
-                    //   fontSize: 29,
-                    //   color: Colors.white70,
-                    // ),
                   ),
                   SizedBox(
-                    height: 60,
+                    height: 5,
+                  ),
+                  Container(
+                    child: Text.rich(
+                      TextSpan(
+                        style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                            fontSize: 50,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromARGB(255, 254, 210, 75),
+                          ),
+                        ),
+                        text: 'Safe',
+                        children: [
+                          TextSpan(
+                            style: GoogleFonts.poppins(
+                              textStyle: const TextStyle(
+                                fontSize: 50,
+                                fontWeight: FontWeight.w600,
+                                color: Color.fromARGB(255, 8, 186, 246),
+                              ),
+                            ),
+                            text: 'Bath',
+                          ),
+                          TextSpan(
+                            style: GoogleFonts.poppins(
+                              textStyle: const TextStyle(
+                                  fontSize: 50,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color.fromARGB(255, 255, 255, 255)),
+                            ),
+                            text: '+',
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
                   ),
                   Text(
                     '',
@@ -99,41 +119,6 @@ class Welcome extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // Positioned(
-                  //   bottom: 2000,
-                  //   left: 0,
-                  //   right: 0,
-                  //   child: Padding(
-                  //     padding: EdgeInsets.only(
-                  //         left: 40, right: 40, top: 5, bottom: 40),
-                  //     child: GestureDetector(
-                  //       onTap: () {
-                  //         Navigator.pushReplacement(context,
-                  //             MaterialPageRoute(builder: (_) => Aboutus()));
-                  //       },
-                  //       child: Container(
-                  //         height: 50,
-                  //         // decoration: const BoxDecoration(
-                  //         //   // color: Color.fromARGB(255, 255, 215, 199),
-                  //         //   color: Color.fromARGB(255, 255, 255, 255),
-                  //         //   borderRadius: BorderRadius.all(Radius.circular(30)),
-                  //         // ),
-                  //         child: Center(
-                  //           child: Text(
-                  //             'About Us',
-                  //             style: GoogleFonts.poppins(
-                  //               textStyle: const TextStyle(
-                  //                 color: Colors.black,
-                  //                 fontSize: 10,
-                  //                 fontWeight: FontWeight.w500,
-                  //               ),
-                  //             ),
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
             ],

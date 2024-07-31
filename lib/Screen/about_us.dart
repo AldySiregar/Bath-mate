@@ -1,15 +1,6 @@
-import 'package:firebase/Screen/home_page.dart';
-import 'package:firebase/Screen/welcome.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:firebase/Screen/about_us.dart';
-import 'package:firebase/Screen/emer_number.dart';
-import 'package:firebase/Screen/user_guide.dart';
-import 'package:firebase/Firebase/auth.dart';
-import 'package:firebase/Screen/welcome.dart';
+import 'package:firebase/Screen/drawer.dart';
 
 class Aboutus extends StatelessWidget {
   const Aboutus({super.key});
@@ -74,13 +65,13 @@ class Aboutus extends StatelessWidget {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(10),
                             child: Image.asset(
-                              'assets/aduhh_foreground-modified.png',
-                              width: 100,
+                              'assets/papa.png',
+                              width: 150,
                               fit: BoxFit.contain,
                             ),
                           ),
                           SizedBox(
-                            height: 30,
+                            height: 20,
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -92,7 +83,7 @@ class Aboutus extends StatelessWidget {
                                   // height: 100,
                                   // width: 370,
                                   child: Text(
-                                    "Introducing Bath-mate, your reliable bathroom safety companion. With Bath-mate, you no longer need to wear devices on your body. Simply mount it on your bathroom wall, connect it to your home Wi-Fi, and enjoy peace of mind.",
+                                    "Introducing SafeBath+, your reliable bathroom safety companion. With SafeBath+, you no longer need to wear devices on your body. Simply mount it on your bathroom wall, connect it to your home Wi-Fi, and enjoy peace of mind.",
                                     textAlign: TextAlign.justify,
                                     style: GoogleFonts.poppins(
                                       textStyle: TextStyle(
@@ -105,10 +96,9 @@ class Aboutus extends StatelessWidget {
                                 ),
                               ),
                               Container(
-                                height: 100,
                                 width: 370,
                                 child: Text(
-                                  "Bath-mate uses innovative FMCW radar technology for accurate fall detection while ensuring data privacy. Stay safe with Bath-mate—it’s like having a silent guardian watching over your loved ones. Plus, with our integrated emergency call feature, you’re just one tap away from contacting emergency medical services.",
+                                  "SafeBath+ uses innovative FMCW radar technology for accurate fall detection while ensuring data privacy. Plus, with our integrated emergency call feature, you’re just one tap away from contacting emergency medical services. Stay safe with SafeBath+, it’s like having a silent guardian watching over your loved ones.",
                                   textAlign: TextAlign.justify,
                                   style: GoogleFonts.poppins(
                                     textStyle: TextStyle(
@@ -121,9 +111,8 @@ class Aboutus extends StatelessWidget {
                             ],
                           ),
                           SizedBox(
-                            height: 15,
+                            height: 30,
                           ),
-                          SizedBox(height: 30),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -134,6 +123,7 @@ class Aboutus extends StatelessWidget {
                                   'Advisor',
                                   style: GoogleFonts.poppins(
                                     textStyle: TextStyle(
+                                      color: Colors.white,
                                       fontSize: 13,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -224,18 +214,19 @@ class Aboutus extends StatelessWidget {
                             ],
                           ),
                           SizedBox(
-                            height: 70,
+                            height: 20,
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Container(
                                 height: 20,
-                                width: 130,
+                                // width: 130,
                                 child: Text(
-                                  'Our Team  "FYS 1"',
+                                  'Developed by  "FYS 1"',
                                   style: GoogleFonts.poppins(
                                     textStyle: TextStyle(
+                                      color: Colors.white,
                                       fontSize: 13,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -250,76 +241,113 @@ class Aboutus extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(600),
-                                child: Image.asset(
-                                  'assets/sijee.jpg',
-                                  width: 70,
-                                ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(600),
+                                    child: Image.asset(
+                                      'assets/edit2joja.jpg',
+                                      width: 70,
+                                    ),
+                                  ),
+                                  Container(
+                                    child: Text(
+                                      'SJE',
+                                      style: GoogleFonts.poppins(
+                                        textStyle: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    child: Text(
+                                      '1102201692',
+                                      style: GoogleFonts.poppins(
+                                        textStyle: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                               SizedBox(
                                 width: 55,
                               ),
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(600),
-                                child: Image.asset(
-                                  'assets/joja.jpg',
-                                  width: 70,
-                                ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(600),
+                                    child: Image.asset(
+                                      'assets/editsije.jpg',
+                                      width: 70,
+                                    ),
+                                  ),
+                                  Container(
+                                    child: Text(
+                                      'JAW',
+                                      style: GoogleFonts.poppins(
+                                        textStyle: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    child: Text(
+                                      '1102204524',
+                                      style: GoogleFonts.poppins(
+                                        textStyle: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                               SizedBox(
                                 width: 55,
                               ),
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(600),
-                                child: Image.asset(
-                                  'assets/Aldyy.jpg',
-                                  width: 70,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                child: Text(
-                                  '1102201692',
-                                  style: GoogleFonts.poppins(
-                                    textStyle: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold,
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(600),
+                                    child: Image.asset(
+                                      'assets/edit3aldyy.jpg',
+                                      width: 70,
                                     ),
                                   ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 45,
-                              ),
-                              Container(
-                                child: Text(
-                                  '1102204524',
-                                  style: GoogleFonts.poppins(
-                                    textStyle: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold,
+                                  Container(
+                                    child: Text(
+                                      'JAY',
+                                      style: GoogleFonts.poppins(
+                                        textStyle: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 45,
-                              ),
-                              Container(
-                                child: Text(
-                                  '1102204439',
-                                  style: GoogleFonts.poppins(
-                                    textStyle: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold,
+                                  Container(
+                                    child: Text(
+                                      '1102204439',
+                                      style: GoogleFonts.poppins(
+                                        textStyle: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
+                                ],
                               ),
                             ],
                           ),
@@ -327,8 +355,7 @@ class Aboutus extends StatelessWidget {
                             height: 40,
                           ),
                           Container(
-                            child: Image.asset(
-                                'assets/aduhh_foreground-modified.png'),
+                            child: Image.asset('assets/play_store_512.png'),
                             width: 50,
                           ),
                           SizedBox(
@@ -355,152 +382,7 @@ class Aboutus extends StatelessWidget {
           ),
         ],
       ),
-      drawer: Drawer(
-        child: Container(
-          color: Color.fromARGB(255, 255, 255, 255),
-          child: ListView(
-            children: [
-              DrawerHeader(
-                child: Center(
-                  child: Column(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(60),
-                        child: Image.network(
-                          '$imgUrl',
-                          fit: BoxFit.fill,
-                          width: 90,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        '$userEmail',
-                        style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                            fontSize: 14,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.home),
-                title: Text(
-                  'Home',
-                  style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => MyHomeApp(),
-                    ),
-                  );
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.phone_callback_rounded),
-                title: Text(
-                  'Regist Emergency Number',
-                  style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => Insertnum(),
-                    ),
-                  );
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.menu_book_rounded),
-                title: Text(
-                  "User's Guide",
-                  style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => Panduan(),
-                    ),
-                  );
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.info_outline),
-                title: Text(
-                  "About Us",
-                  style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => Aboutus(),
-                    ),
-                  );
-                },
-              ),
-              SizedBox(
-                height: 400,
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.logout_rounded,
-                  color: Colors.red,
-                ),
-                title: Text(
-                  'Sign Out',
-                  style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                      fontSize: 14,
-                      color: Colors.red,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                onTap: () {
-                  AuthMethods().signOutWithGoogle(context);
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => Welcome(),
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
+      drawer: MyDrawer(),
     );
   }
 }

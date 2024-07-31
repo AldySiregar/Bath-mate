@@ -9,6 +9,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+String errorLog = '';
+
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
 
@@ -31,12 +33,13 @@ class _LogInState extends State<LogIn> {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => SplashScreen()));
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
+      print(e.code);
+      if (e.code == 'invalid-credential') {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            backgroundColor: Colors.orangeAccent,
+            backgroundColor: Color.fromARGB(255, 243, 32, 32),
             content: Text(
-              "No User Found for that Email",
+              "Email or Password is not registered!",
               style: GoogleFonts.poppins(
                 textStyle: TextStyle(
                   fontSize: 14,
@@ -46,12 +49,12 @@ class _LogInState extends State<LogIn> {
             ),
           ),
         );
-      } else if (e.code == 'wrong-password') {
+      } else if (e.code == 'invalid-email') {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            backgroundColor: Colors.orangeAccent,
+            backgroundColor: Color.fromARGB(255, 243, 32, 32),
             content: Text(
-              "Wrong Password Provided by User",
+              "Email is not Valid!",
               style: GoogleFonts.poppins(
                 textStyle: TextStyle(
                   fontSize: 14,
@@ -72,16 +75,19 @@ class _LogInState extends State<LogIn> {
       body: SafeArea(
         child: Column(
           children: [
+            SizedBox(
+              height: 30,
+            ),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Container(
-                      // width: MediaQuery.of(context).size.width,
-                      child: Image.asset(
-                        'assets/aduhh.png',
-                        width: 450,
-                      ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Image.asset(
+                      'assets/play_store_512.png',
+                      width: 450,
                     ),
                     SizedBox(
                       height: 30.0,
@@ -261,7 +267,7 @@ class _LogInState extends State<LogIn> {
                       ],
                     ),
                     SizedBox(
-                      height: 40.0,
+                      height: 30.0,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
